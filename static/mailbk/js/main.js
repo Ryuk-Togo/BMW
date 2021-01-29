@@ -8,6 +8,13 @@ $(function(){
         window.location.href = '/mailbk/';
     });
 
+    // メールファイルをタブで開く
+    $('a#link_mail').on('click',function(e){
+        e.preventDefault(); 
+        var url = $(this).attr('href'); 
+        window.open(url, '_blank');
+    });
+
 });
 
 //フォルダの形成

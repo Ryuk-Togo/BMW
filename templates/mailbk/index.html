@@ -13,13 +13,13 @@
     メールバックアップ
 </header>
 <div id="content">
-    <div id="menu">
+    <!-- <div id="menu">
         メニュー
         <button id="mkdir" name="mkdir" class="btn_menu">フォルダ作成</button>
         <button id="import" name="mkdir" class="btn_menu">インポート</button>
         <button id="reflesh" name="mkdir" class="btn_menu">リフレッシュ</button>
     </div>
-    <br/>
+    <br/> -->
     <input type="hidden" id="folder_data" value="{{folders}}" />
     <br/>
     <div id="folder_list">
@@ -30,7 +30,7 @@
         メールリスト
         <ul>
             {% for mail in mails %}
-            <li><a href="" >{{mail.subject}}</a></li>
+            <li><a href="{{mail.filename}}" id="link_mail" >{{mail.subject}}</a></li>
             {% endfor %}    
         </ul>
     </div>

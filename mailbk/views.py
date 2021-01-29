@@ -48,8 +48,9 @@ def index(request,url=None):
                     subject = e
 
                 mailList.append({
-                    'filename' : email,
+                    'filename' : 'mail/' + email.replace('/','%5c'),
                     'subject' : subject,
+                    # 'filePath' : url + '%5c' + email
                     # 'subject' : mailData['subject']
                 })
 
@@ -75,72 +76,25 @@ def getDir(path,folderName):
 
     return structList
 
+def mail(request,url):
+    if request.method == 'GET':
+        # メールファイルを開く
+        mailpas = MailParser(os.path.join(*url.split('\\')))
+        try:
+            mailpas.get_attr_data()
+        except Exception as e:
+            mailpas.subject = e
+        
+        # メールファイルのデータを出力
+        context = {
+            'subject' : mailpas.subject,
+            'from' : mailpas.from_address,
+            'to' : mailpas.to_address,
+            'cc' : mailpas.cc_address,
+            'disc' : mailpas.body,
+            'atach' : mailpas.attach_file_list,
+            'back' : url,
+        }
+        return render(request, 'mailbk/mail.html', context)
 
-# def makeMailDoc(mailFile):
-#     result = {}
 
-#     FROM = 'From: '
-#     TO = 'To: '
-#     CC = 'Cc: '
-#     SUBJECT = 'Subject: '
-#     CHARSET = 'Content-Type: text/plain; charset='
-#     DISCRIPT = 'Content-Transfer-Encoding: ' # 後の行
-#     ATACHMENT = 'Content-Disposition: ' # 添付ファイルがある事を意味し、以降が添付ファイルのバイナリデータ
-#     FILE_NAME = 'Content-Disposition: attachment; filename=' # 添付ファイルの名前
-#     m_from = ''
-#     to = []
-#     cc = []
-#     subject = ''
-#     chaset = ''
-#     discript = []
-#     atachment = []
-#     isDisc = False
-#     isAtach = False
-    
-#     for line in mailFile:
-
-#         if FROM in line:
-#             m_from = line.replace(FROM,'')
-
-#         if TO in line:
-#             to.append(line.replace(TO,''))
-
-#         if CC in line:
-#             cc.append(line.replace(CC,''))
-
-#         if SUBJECT in line:
-#             subject = line.replace(SUBJECT,'')
-
-#         if CHARSET in line:
-#             chaset = line.replace(CHARSET,'')
-
-#         if DISCRIPT in line:
-#             isDisc = True
-#             isAtach = False
-#         if isDisc:
-#             discript.append(line)
-
-#         # if ATACHMENT in line:
-#         #     isDisc = False
-#         #     isAtach = True
-#         # if isAtach:
-#         #     atachment.append(line)
-
-#         # if FILE_NAME in line:
-#         #     chaset = line.replace(FILE_NAME,'')
-#         #     isDisc = False
-#         #     # 添付ファイル
-#         #     isAtach = True
-#         # if isAtach:
-#         #     atachment.append(line)
-
-#     result = {
-#         'charset' : chaset,
-#         'from' : m_from.encode(chaset),
-#         'to' : to,
-#         'cc' : cc,
-#         'subject' : subject.encode('shift-jis'),
-#         'discript' : discript,
-#         # 'atachment' : atachment,
-#     }
-#     return result

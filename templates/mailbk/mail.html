@@ -1,0 +1,46 @@
+{% extends "mailbk/base.html" %}
+{% load static %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'mailbk/css/mail.css' %}" >
+<!-- <script src="{% static 'mailbk/js/main.js' %}" ></script> -->
+
+{% endblock %}
+
+{% block body %}
+
+<header>
+    
+</header>
+<div id="content">
+    <a href="{{back}}">戻る</a>
+    <hr/>
+    <div id="subjet">
+        タイトル:  {{subject}}
+    </div>
+    <hr/>
+    <div id="from">
+        FROM:  {{from}}
+    </div>
+    <hr/>
+    <div id="to">
+        TO:  {{to}}
+    </div>
+    <hr/>
+    <div id="cc">
+        CC:  {{cc}}
+    </div>
+    <hr/>
+    <div id="disc">
+        本文:<br/>
+        {{disc}}
+    </div>
+    <hr/>
+    <div id="atach">
+        添付ファイル:<br/>
+        {{atach}}
+    </div>
+    <hr/>
+    <a href="{{back}}">戻る</a>
+</div>
+{% endblock %}
