@@ -1,0 +1,38 @@
+{% extends "mailbk/base.html" %}
+{% load static %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'mailbk/css/main.css' %}" >
+<script src="{% static 'mailbk/js/main.js' %}" ></script>
+
+{% endblock %}
+
+{% block body %}
+
+<header>
+    メールバックアップ
+</header>
+<div id="content">
+    <div id="menu">
+        メニュー
+        <button id="mkdir" name="mkdir" class="btn_menu">フォルダ作成</button>
+        <button id="import" name="mkdir" class="btn_menu">インポート</button>
+        <button id="reflesh" name="mkdir" class="btn_menu">リフレッシュ</button>
+    </div>
+    <br/>
+    <input type="hidden" id="folder_data" value="{{folders}}" />
+    <br/>
+    <div id="folder_list">
+        フォルダ欄<br/>
+        <ul id="root"></ul>
+    </div>
+    <div id="mail_list">
+        メールリスト
+        <ul>
+            {% for mail in mails %}
+            <li><a href="" >{{mail.subject}}</a></li>
+            {% endfor %}    
+        </ul>
+    </div>
+</div>
+{% endblock %}
