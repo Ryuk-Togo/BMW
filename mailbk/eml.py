@@ -14,13 +14,14 @@ class MailParser(object):
     to_address = None
     cc_address = None
     from_address = None
-    body = ""
+    body = []
     attach_file_list = []
 
     def __init__(self, mail_file_path):
         self.mail_file_path = mail_file_path
         # emlファイルからemail.message.Messageインスタンスの取得
         with open(mail_file_path, 'rb') as email_file:
+            # self.email_message = email.message_from_bytes(email_file.readlines())
             self.email_message = email.message_from_bytes(email_file.read())
         self.subject = None
         self.to_address = None

@@ -91,7 +91,7 @@ def mail(request,url):
             'from' : mailpas.from_address,
             'to' : mailpas.to_address,
             'cc' : mailpas.cc_address,
-            'disc' : mailpas.body,
+            'disc' : mailpas.body.splitlines(),
             'atach' : mailpas.attach_file_list,
             'back' : url,
         }

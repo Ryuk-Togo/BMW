@@ -4,7 +4,6 @@
 {% block header %}
 <link rel="stylesheet" href="{% static 'mailbk/css/mail.css' %}" >
 <!-- <script src="{% static 'mailbk/js/main.js' %}" ></script> -->
-
 {% endblock %}
 
 {% block body %}
@@ -13,8 +12,7 @@
     
 </header>
 <div id="content">
-    <a href="{{back}}">戻る</a>
-    <hr/>
+    <br/>
     <div id="subjet">
         タイトル:  {{subject}}
     </div>
@@ -33,7 +31,10 @@
     <hr/>
     <div id="disc">
         本文:<br/>
-        {{disc}}
+        <!-- {{disc}} -->
+        {% for s in disc %}
+        {{s}}<br/>
+        {% endfor %}
     </div>
     <hr/>
     <div id="atach">
@@ -41,6 +42,5 @@
         {{atach}}
     </div>
     <hr/>
-    <a href="{{back}}">戻る</a>
 </div>
 {% endblock %}
