@@ -23,4 +23,5 @@ db-datadir/
 !requirements.txt
 media/
 bmw/settings.py
+bmw/mail/
 # settings.py
