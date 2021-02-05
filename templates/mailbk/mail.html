@@ -39,7 +39,9 @@
     <hr/>
     <div id="atach">
         添付ファイル:<br/>
-        {{atach}}
+        {% for attachFile in attach %}
+        <a href="/mailbk/download/{{ attachFile.path }}">{{attachFile.name}}</a>
+        {% endfor %}
     </div>
     <hr/>
 </div>

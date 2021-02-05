@@ -9,5 +9,6 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     # url(r'^(?P<url>\w+)/$', views.index, name='index'),
     path('<str:url>', views.index, name='index'),
-    path('mail/<str:url>', views.mail, name='index'),
+    path('mail/<str:url>', views.mail, name='mail'),
+    path('download/<str:url>', views.download, name='download'),
 ]

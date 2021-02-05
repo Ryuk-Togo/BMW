@@ -5,6 +5,8 @@ emlファイルを元に扱いやすい様にデータを取得する
 import sys
 import email
 from email.header import decode_header
+import chardet
+import mailbk.encoding
 
 class MailParser(object):
     """
@@ -21,7 +23,6 @@ class MailParser(object):
         self.mail_file_path = mail_file_path
         # emlファイルからemail.message.Messageインスタンスの取得
         with open(mail_file_path, 'rb') as email_file:
-            # self.email_message = email.message_from_bytes(email_file.readlines())
             self.email_message = email.message_from_bytes(email_file.read())
         self.subject = None
         self.to_address = None
@@ -76,8 +77,10 @@ ATTACH_FILE_NAME:
             # 中のpartにあるので読み飛ばす
             if part.get_content_maintype() == 'multipart':
                 continue
+
             # ファイル名の取得
             attach_fname = part.get_filename()
+
             # ファイル名がない場合は本文のはず
             if not attach_fname:
                 charset = str(part.get_content_charset())
@@ -87,9 +90,12 @@ ATTACH_FILE_NAME:
                     self.body += part.get_payload(decode=True)
             else:
                 # ファイル名があるならそれは添付ファイルなので
-                # データを取得する
+                # データを取得する 
+                charset = str(part.get_content_charset())
+                enc = str(part.get_content_type())
+                cty = str(part.get_content_type())
                 self.attach_file_list.append({
-                    "name": attach_fname,
+                    "name": mailbk.encoding.decode_filename(attach_fname, charset, enc, cty),
                     "data": part.get_payload(decode=True)
                 })
         MailParser.subject = self.subject
@@ -121,6 +127,8 @@ ATTACH_FILE_NAME:
                 ret += fragment.decode("UTF-8","ignore")
         return ret
 
-if __name__ == "__main__":
-    result = MailParser(sys.argv[1]).get_attr_data()
-    print(result)
+# if __name__ == "__main__":
+#     result = MailParser(sys.argv[1]).get_attr_data()
+#     print(result)
+
+
