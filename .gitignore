@@ -24,4 +24,6 @@ db-datadir/
 media/
 bmw/settings.py
 mail/*
+sample/webscrayping/dogimg/*
+sample/webscrayping/xkcd/*
 # settings.py
