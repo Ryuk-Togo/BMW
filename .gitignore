@@ -26,4 +26,5 @@ bmw/settings.py
 mail/*
 sample/webscrayping/dogimg/*
 sample/webscrayping/xkcd/*
+bmw/initial_sql/
 # settings.py
