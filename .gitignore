@@ -22,8 +22,9 @@ db-datadir/
 !Dockerfile
 !requirements.txt
 media/
-bmw/settings.py
+# bmw/settings.py
 mail/*
 sample/webscrayping/dogimg/*
 sample/webscrayping/xkcd/*
+initial_sql/*
 # settings.py
