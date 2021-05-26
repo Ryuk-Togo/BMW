@@ -1,6 +1,6 @@
 div#content {
-    width: 720px;
-    height: 500px;
+    width: 1000px;
+    height: 90%;
     overflow: hidden;
 }
     
@@ -15,7 +15,7 @@ div#menu {
 div#folder_list {
     color: #000000;
     background-color: #ffffff;
-    width: 220px;
+    width: 400px;
     height: 100%;
     float: left;
     overflow: scroll;
@@ -24,7 +24,7 @@ div#folder_list {
 div#mail_list {
     color: #000000;
     background-color: #ffffff;
-    width: 500px;
+    width: 600px;
     height: 100%;
     float: right;
     overflow: scroll;

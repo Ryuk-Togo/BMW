@@ -29,7 +29,7 @@ def index(request,url=None):
         mailList = []
         if url:
             # URLのスラッシュをpythonファイルパスのスラッシュに変換
-            dirpath = './' + os.path.join(*url.split('\\')) + '/*.eml'
+            dirpath = './' + os.path.join(*url.split('%5c')) + '/*.eml'
             mailFileList = glob.glob(dirpath)
 
             # メールファイルのリストを作成
@@ -54,7 +54,7 @@ def index(request,url=None):
                     subject = e
 
                 mailList.append({
-                    'filename' : 'mail/' + email.replace('/','%5c'),
+                    'filename' : 'mail/' + email.replace('\\','%5c'),
                     'subject' : subject,
                     # 'filePath' : url + '%5c' + email
                     # 'subject' : mailData['subject']
@@ -63,6 +63,7 @@ def index(request,url=None):
         context = {
             'folders' : mailDir,
             'mails' : mailList,
+            'title' : 'メールリスト',
         }
         return render(request, 'mailbk/index.html', context)
 
@@ -78,6 +79,7 @@ def mail(request,url):
         dirpath = os.path.dirname(os.path.join(*url.split('\\')))
         # for attachFile in mailpas.attach_file_list:
         #     return HttpResponse(encoding.check_encoding(attachFile["path"]))
+        # attachFileList = _getAttachFileList(mailpas.attach_file_list, dirpath)
         attachFileList = _getAttachFileList(mailpas.attach_file_list, dirpath)
 
         # メールファイルのデータを出力
@@ -94,6 +96,7 @@ def mail(request,url):
             'attach' : attachFileList,
             # 'attach' : mailpas.attach_file_list,
             'back' : url,
+            'title' : mailpas.subject,
         }
         return render(request, 'mailbk/mail.html', context)
 
@@ -149,11 +152,14 @@ def _getAttachFileList(attachFileList, url):
     attachFileNameList = []
 
     for attachFile in attachFileList:
-        with open(url + '/' + attachFile["name"],mode="bw") as f:
+        print('url:' + url + '/' + attachFile["name"])
+        # with open(url + '/' + encoding.decode_filename(attachFile["name"],'','',''),mode='bw') as f:
+        with open(url + '\\' + attachFile["name"],mode='bw') as f:
             f.write(attachFile["data"])
 
         attachFileName = {
-            'path' : url.replace('/','%5c') + '%5c' + attachFile["name"],
+            'path' : url.replace('\\','%5c') + '%5c' + attachFile["name"],
+            # 'path' : url + '/' + attachFile["name"],
             'name' : attachFile["name"],
         }
         attachFileNameList.append(attachFileName)

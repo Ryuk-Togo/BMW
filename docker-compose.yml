@@ -11,7 +11,7 @@ services:
       - POSTGRES_USER=bmw
       - POSTGRES_PASSWORD=bmw
     volumes:
-      - ./db-datadir:/var/lib/postgresql/data
+      - ./db-datadir:C:\Program Files (x86)\PostgreSQL\9.2\data
 
   web:
     build: .

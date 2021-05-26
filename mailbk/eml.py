@@ -97,6 +97,7 @@ ATTACH_FILE_NAME:
                 self.attach_file_list.append({
                     "name": mailbk.encoding.decode_filename(attach_fname, charset, enc, cty),
                     "data": part.get_payload(decode=True)
+                    # "data": part.get_payload(decode=False)
                 })
         MailParser.subject = self.subject
         MailParser.to_address = self.to_address
