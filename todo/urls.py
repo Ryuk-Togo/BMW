@@ -7,6 +7,8 @@ from . import views
 app_name = "todo"
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    path('dotodo', views.dotodo, name='dotodo'),
-    path('daytodo', views.daytodo, name='daytodo'),
+    # path('dotodo/<int:row>', views.dotodo, name='dotodo'),
+    path('dotodo/', views.dotodo, name='dotodo'),
+    path('daytodo/', views.daytodo, name='daytodo'),
+    path('todoval/', views.todoval, name='todoval'),
 ]

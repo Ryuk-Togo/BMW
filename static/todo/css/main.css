@@ -1,0 +1,109 @@
+div#content {
+    width: 1000px;
+    height: 90%;
+    overflow: hidden;
+}
+
+div#todo_list {
+    color: #000000;
+    background-color: #ffffff;
+    width: 300px;
+    height: 100%;
+    float: left;
+    overflow: hidden;
+}
+
+.message {
+    color: #fd0404;
+    background-color: #ffffff;
+    width: 100%;
+    overflow: hidden;
+}
+
+.todo_table {
+    table-layout: fixed;
+    width: 100%;
+    height: 70%;
+}
+
+.todo_work_time {
+    width: 20px;
+}
+
+.todo_todo {
+    width: 80px;
+}
+
+.todo_complete {
+    width: 20px;
+}
+
+div#contents_page {
+    color: #000000;
+    background-color: #ffffff;
+    width: 700px;
+    height: 100%;
+    float: right;
+    overflow:scroll;
+}
+
+.contents_bar {
+    width: 100%;
+}
+
+.menu_title {
+    float: left;
+    color: #ffffff;
+    background-color: #585858;
+    width: 100%;
+    height: 60px;
+    text-align: center;
+}
+
+.menu_title_cell {
+    text-align: center;
+    padding: 10px;
+}
+
+.menu_link {
+    color: #ffffff;
+    text-decoration:none;
+    text-align: center;
+}
+
+.menu_link:link {
+    color: #ffffff;
+    text-decoration:none;
+}
+
+.menu_link:visited {
+    color:#fff;
+    text-decoration:none;     
+}
+
+.menu_link:hover {
+    color:#999;
+    text-decoration:none;
+}
+
+.menu_link:active {
+    color:#fff;
+    text-decoration:none;         
+}
+
+.active_menu_cell {
+    color: #fff;
+    background-color:rgb(94, 94, 255);
+    margin: 10px;
+}
+
+.todo_title {
+    background-color:rgb(203, 203, 255);
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+.todo_row_cell {
+    text-align: center;
+}

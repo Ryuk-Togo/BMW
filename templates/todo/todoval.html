@@ -1,0 +1,18 @@
+{% extends "todo/base.html" %}
+{% load static %}
+
+{% block header %}
+
+{% endblock %}
+
+
+{% block todo_content %}
+<table class="menu_title" >
+    <tr>
+        <th class="menu_title_cell"><a class="menu_link" href="/todo/">カレンダー</a></th>
+        <th class="menu_title_cell"><a class="menu_link" href="/todo/dotodo/">TODO作成</a></th>
+        <th class="menu_title_cell active_menu_cell"><a class="menu_link" href="/todo/daytodo/">TODO割振</a></th>
+    </tr>
+</table>
+TODO一覧
+{% endblock %}

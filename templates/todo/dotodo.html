@@ -1,0 +1,40 @@
+{% extends "todo/base.html" %}
+{% load static %}
+
+{% block header %}
+
+{% endblock %}
+
+
+{% block todo_content %}
+<table class="menu_title" >
+    <tr>
+        <th class="menu_title_cell"><a class="menu_link" href="/todo/">カレンダー</a></th>
+        <th class="menu_title_cell active_menu_cell"><a class="menu_link" href="/todo/dotodo/">TODO作成</a></th>
+        <th class="menu_title_cell"><a class="menu_link" href="/todo/daytodo/">TODO割振</a></th>
+    </tr>
+</table>
+<div class="todo_title">
+    DO
+</div>
+<form method="POST" id="form">
+    {{ input_do_form.management_form }}
+    {% csrf_token %}
+    {{ input_do_form.as_p }}
+    <!-- {{ input_do_form.delivery_date }}
+    {{ input_do_form.do }}
+    {{ input_do_form.id }} -->
+    
+    <div class="todo_title">
+        TODO
+    </div>
+    <div id="todo_input">
+        {{ input_todo_formset.management_form }}
+        {% for todo in input_todo_formset %}
+            <p>{{todo.row}}{{todo.id}}{{todo.todo}}</p>
+        {% endfor %}
+    </div>
+    <button type="button" class="btn_insert">追加</button>
+    <button type="submit">登録</button>
+</form>
+{% endblock %}

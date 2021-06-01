@@ -7,17 +7,47 @@
     <title>
         {{title}}
     </title>
+    <link rel="stylesheet" href="{% static 'todo/css/main.css' %}" >
     <link rel="stylesheet" href="{% static 'common/css/bootstrap.min.css' %}" >
     <link rel="stylesheet" href="{% static 'common/css/jquery-ui.css' %}" >
     <script src="{% static 'common/js/bootstrap.js' %}" ></script>
     <script src="{% static 'common/js/jquery-3.3.1.js' %}" ></script>
     <script src="{% static 'common/js/jquery-ui.js' %}" ></script>
+    <script src="{% static 'todo/js/main.js' %}" ></script>
     {% block header %}
     {% endblock %}
 </head>
 <body>
-    {{message}}
-    {% block body %}
-    {% endblock %}
+    <div id="content">
+        <div id="todo_list">
+            <div class="message">
+                {{user_id}}
+                {{user_name}}
+            </div>
+            <div class="menu_title">
+                {{todo_day}}
+            </div>
+            <table class="todo_table">
+                <tr>
+                    <th class="todo_work_time">時間</th>
+                    <th class="todo_todo">タスク</th>
+                    <th class="todo_complete">完了</th>
+                </tr>
+                <br>
+            {% for todo in todo_list %}
+                <tr>
+                    <td class="todo_work_time">{{todo.work_time}}</td>
+                    <td class="todo_todo">{{todo.todo}}</td>
+                    <td class="todo_complete">{{todo.complete}}</td>
+                </tr>
+            {% endfor %}
+            </table>
+            {{message}}
+        </div>
+        <div id="contents_page">
+            {% block todo_content %}
+            {% endblock %}
+        </div>
+    </div>
 </body>
 </html>
