@@ -4,6 +4,7 @@ from .models import TmpFile
 from .forms import TmpFileModelFormSet
 from django.http import HttpResponse
 from django.http.response import JsonResponse
+from datetime import datetime
 import os
 import glob
 from mailbk.eml import MailParser
@@ -11,6 +12,7 @@ from mailbk.eml import MailParser
 import mimetypes
 import shutil
 from  mailbk import encoding
+from operator import itemgetter
 
 # from pysmb
 
@@ -45,20 +47,32 @@ def index(request,url=None):
                 #     return HttpResponse(e)
                 
                 subject = ''
+                recieve_date = ''
                 try:
                     mailpas = MailParser(email)
                     mailpas.get_attr_data()
                     # return HttpResponse(result)
                     subject = mailpas.subject
+                    dte = mailpas.receive_date
+                    # recieve_date = datetime.strptime(mailpas.receive_date, '%a%d')
+
+                    ts = ''
+                    for s in dte.split()[1:5]:
+                        ts += s
+                    # 取得した日付情報から naive な datetime オブジェクトを生成
+                    recieve_date = datetime.strptime(ts, '%d%b%Y%H:%M:%S')
+
                 except Exception as e:
                     subject = e
 
                 mailList.append({
+                    'recieve_date' : recieve_date,
                     'filename' : 'mail/' + email.replace('/','%5c'),
-                    'subject' : subject,
+                    'subject' : subject + str(recieve_date),
                     # 'filePath' : url + '%5c' + email
                     # 'subject' : mailData['subject']
                 })
+            mailList.sort(key=itemgetter('recieve_date'), reverse=False)
 
         context = {
             'folders' : mailDir,

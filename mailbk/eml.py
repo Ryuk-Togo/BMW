@@ -13,6 +13,7 @@ class MailParser(object):
     メールファイルのパスを受け取り、それを解析するクラス
     """
     subject = None
+    receive_date = None
     to_address = None
     cc_address = None
     from_address = None
@@ -28,8 +29,10 @@ class MailParser(object):
         self.to_address = None
         self.cc_address = None
         self.from_address = None
+        self.receive_date = None
         self.body = ""
         # 添付ファイル関連の情報
+
         # {name: file_name, data: data}
         self.attach_file_list = []
         # emlの解釈
@@ -52,6 +55,7 @@ ATTACH_FILE_NAME:
 {}
 """.format(
             self.subject,
+            self.receive_date,
             self.from_address,
             self.to_address,
             self.cc_address,
@@ -67,6 +71,7 @@ ATTACH_FILE_NAME:
         __init__内で呼び出している
         """
         self.subject = self._get_decoded_header("Subject")
+        self.receive_date = self._get_decoded_header("Date")
         self.to_address = self._get_decoded_header("To")
         self.cc_address = self._get_decoded_header("Cc")
         self.from_address = self._get_decoded_header("From")
@@ -99,6 +104,7 @@ ATTACH_FILE_NAME:
                     "data": part.get_payload(decode=True)
                 })
         MailParser.subject = self.subject
+        MailParser.receive_date = self.receive_date
         MailParser.to_address = self.to_address
         MailParser.cc_address = self.cc_address
         MailParser.from_address = self.from_address

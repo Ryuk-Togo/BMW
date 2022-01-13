@@ -30,7 +30,7 @@
         メールリスト
         <ul>
             {% for mail in mails %}
-            <li><a href="{{mail.filename}}" id="link_mail" >{{mail.subject}}</a></li>
+            <li>{{mail.recieve_date}}　<a href="{{mail.filename}}" id="link_mail" >{{mail.subject}}</a></li>
             {% endfor %}    
         </ul>
     </div>
