@@ -14,23 +14,23 @@
 <div id="content">
     <br/>
     <div id="subjet">
-        タイトル:  {{subject}}
+        <div class="title_cls">タイトル:</div>  {{subject}}
     </div>
     <hr/>
     <div id="from">
-        FROM:  {{from}}
+        <div class="title_cls">FROM:</div>  {{from}}
     </div>
     <hr/>
     <div id="to">
-        TO:  {{to}}
+        <div class="title_cls">TO:</div>  {{to}}
     </div>
     <hr/>
     <div id="cc">
-        CC:  {{cc}}
+        <div class="title_cls">CC:</div>  {{cc}}
     </div>
     <hr/>
     <div id="disc">
-        本文:<br/>
+        <div class="title_cls">本文:</div><br/>
         <!-- {{disc}} -->
         {% for s in disc %}
         {{s}}<br/>
@@ -38,7 +38,7 @@
     </div>
     <hr/>
     <div id="atach">
-        添付ファイル:<br/>
+        <div class="title_cls">添付ファイル:</div><br/>
         {% for attachFile in attach %}
         <a href="/mailbk/download/{{ attachFile.path }}">{{attachFile.name}}</a>
         {% endfor %}
