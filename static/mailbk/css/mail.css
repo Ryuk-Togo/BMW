@@ -2,3 +2,7 @@ div#subject {
     font-size: 10px;
 }
     
+.title_cls {
+    font: bold;
+    color: rgb(45, 216, 216);
+}

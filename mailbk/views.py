@@ -15,6 +15,8 @@ from  mailbk import encoding
 from operator import itemgetter
 
 # from pysmb
+_SLASH = '\\'   # windows
+# _SLASH = '/'  # linux
 
 # Create your views here.
 def index(request,url=None):
@@ -69,8 +71,8 @@ def index(request,url=None):
                     'recieve_date' : recieve_date,
                     'filename' : 'mail/' + email.replace('/','%5c'),
                     'subject' : subject + str(recieve_date),
-                    # 'filePath' : url + '%5c' + email
-                    # 'subject' : mailData['subject']
+                    # 'filename' : 'mail/' + email.replace(_SLASH,'%5c'),
+                    # 'subject' : subject,
                 })
             mailList.sort(key=itemgetter('recieve_date'), reverse=False)
 
@@ -163,14 +165,17 @@ def _getAttachFileList(attachFileList, url):
     attachFileNameList = []
 
     for attachFile in attachFileList:
-        with open(url + '/' + attachFile["name"],mode="bw") as f:
-            f.write(attachFile["data"])
+        try:
+            with open(url + '/' + attachFile["name"],mode="bw") as f:
+                f.write(attachFile["data"])
 
-        attachFileName = {
-            'path' : url.replace('/','%5c') + '%5c' + attachFile["name"],
-            'name' : attachFile["name"],
-        }
-        attachFileNameList.append(attachFileName)
+            attachFileName = {
+                'path' : url.replace(_SLASH,'%5c') + '%5c' + attachFile["name"],
+                'name' : attachFile["name"],
+            }
+            attachFileNameList.append(attachFileName)
+        except Exception as e:
+            print('添付ファイル' + attachFile["name"])
 
     return attachFileNameList
 
