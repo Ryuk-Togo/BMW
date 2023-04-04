@@ -69,10 +69,10 @@ def index(request,url=None):
 
                 mailList.append({
                     'recieve_date' : recieve_date,
-                    'filename' : 'mail/' + email.replace('/','%5c'),
-                    'subject' : subject + str(recieve_date),
-                    # 'filename' : 'mail/' + email.replace(_SLASH,'%5c'),
-                    # 'subject' : subject,
+                    # 'filename' : 'mail/' + email.replace('/','%5c'),
+                    # 'subject' : subject + str(recieve_date),
+                    'filename' : 'mail/' + email.replace(_SLASH,'%5c'),
+                    'subject' : subject,
                 })
             mailList.sort(key=itemgetter('recieve_date'), reverse=False)
 
@@ -111,6 +111,7 @@ def mail(request,url):
             # 'attach' : mailpas.attach_file_list,
             'back' : url,
         }
+
         return render(request, 'mailbk/mail.html', context)
 
 def download(request,url):

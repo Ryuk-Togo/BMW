@@ -82,7 +82,8 @@ DATABASES = {
         'NAME': 'bmw',
         'USER': 'bmw',
         'PASSWORD': 'bmw',
-        'HOST': 'db',
+        'HOST': '127.0.0.1',
+        # 'HOST': 'db',
         'PORT': 5432,
     }
 }

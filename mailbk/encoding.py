@@ -9,9 +9,12 @@ def decode_filename(val, charset, cte, cty):
         ret = ret.replace("=?ISO-2022-JP?B?", "")
         ret = ret.rstrip("?=")
         # ret = base64.b64decode(ret + '=' * (-len(ret)% 4)).decode('iso-2022-jp')
-        ret = base64.b64decode(ret + '=' * (-len(ret)% 4))
+        try:
+            ret = base64.b64decode(ret + '=' * (-len(ret)% 4))
+            ret = ret.decode('iso-2022-jp')
+        except:
+            pass
         # ret = decode_contentTransferType(ret + '=' * (-len(ret)% 4), cte.lower())
-        ret = ret.decode('iso-2022-jp')
         ret = ret + get_contentType(cty)
     return ret
 

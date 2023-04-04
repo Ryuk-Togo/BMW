@@ -70,6 +70,7 @@ ATTACH_FILE_NAME:
         メールファイルの解析
         __init__内で呼び出している
         """
+        PASS_CONTENT_TYPE = ['multipart','message']
         self.subject = self._get_decoded_header("Subject")
         self.receive_date = self._get_decoded_header("Date")
         self.to_address = self._get_decoded_header("To")
@@ -80,7 +81,7 @@ ATTACH_FILE_NAME:
         for part in self.email_message.walk():
             # ContentTypeがmultipartの場合は実際のコンテンツはさらに
             # 中のpartにあるので読み飛ばす
-            if part.get_content_maintype() == 'multipart':
+            if part.get_content_maintype() in PASS_CONTENT_TYPE:
                 continue
 
             # ファイル名の取得
