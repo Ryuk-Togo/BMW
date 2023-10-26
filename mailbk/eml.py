@@ -23,8 +23,12 @@ class MailParser(object):
     def __init__(self, mail_file_path):
         self.mail_file_path = mail_file_path
         # emlファイルからemail.message.Messageインスタンスの取得
-        with open(mail_file_path, 'rb') as email_file:
-            self.email_message = email.message_from_bytes(email_file.read())
+        try:
+            with open(mail_file_path, 'rb') as email_file:
+                self.email_message = email.message_from_bytes(email_file.read())
+        except Exception as e:
+            print(e)
+        
         self.subject = None
         self.to_address = None
         self.cc_address = None

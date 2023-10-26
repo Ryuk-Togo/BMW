@@ -176,7 +176,14 @@ def _getAttachFileList(attachFileList, url):
             }
             attachFileNameList.append(attachFileName)
         except Exception as e:
-            print('添付ファイル' + attachFile["name"])
+            pass
+            # print('添付ファイル名' + attachFile["name"])
+
+        # attachFileName = {
+        #     'path' : url.replace(_SLASH,'%5c') + '%5c' + attachFile["name"],
+        #     'name' : attachFile["name"],
+        # }
+        # attachFileNameList.append(attachFileName)
 
     return attachFileNameList
 
