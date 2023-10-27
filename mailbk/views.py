@@ -8,7 +8,7 @@ from datetime import datetime
 import os
 import glob
 from mailbk.eml import MailParser
-# from pathlib import Path
+from mailbk.img_from_mail import MailLoad
 import mimetypes
 import shutil
 from  mailbk import encoding
@@ -85,21 +85,15 @@ def index(request,url=None):
 def mail(request,url):
     if request.method == 'GET':
         # メールファイルを開く
-        mailpas = MailParser(os.path.join(*url.split('\\')))
-        try:
-            mailpas.get_attr_data()
-        except Exception as e:
-            mailpas.subject = e
+        # mailpas = MailParser(os.path.join(*url.split('\\')))
+        mailpas = MailLoad(os.path.join(*url.split('\\')))
+        # try:
+        #     mailpas.get_attr_data()
+        # except Exception as e:
+        #     mailpas.subject = e
 
-        dirpath = os.path.dirname(os.path.join(*url.split('\\')))
-        # for attachFile in mailpas.attach_file_list:
-        #     return HttpResponse(encoding.check_encoding(attachFile["path"]))
-        attachFileList = _getAttachFileList(mailpas.attach_file_list, dirpath)
-
-        # メールファイルのデータを出力
-        # for attach in attachFileList:
-        #     ret = encoding.decode_filename(attach['name'])
-        #     return HttpResponse(ret)
+        # dirpath = os.path.dirname(os.path.join(*url.split('\\')))
+        # attachFileList = _getAttachFileList(mailpas.attach_file_list, dirpath)
     
         context = {
             'subject' : mailpas.subject,
@@ -107,8 +101,8 @@ def mail(request,url):
             'to' : mailpas.to_address,
             'cc' : mailpas.cc_address,
             'disc' : mailpas.body.splitlines(),
-            'attach' : attachFileList,
-            # 'attach' : mailpas.attach_file_list,
+            # 'attach' : attachFileList,
+            'attach' : mailpas.attach_file_list,
             'back' : url,
         }
 

@@ -13,7 +13,7 @@ MBOX='INBOX'
 
 IMG_DIR = 'img'
 
-class MailLoad(object);
+class MailLoad(object):
     
     subject = None
     receive_date = None
@@ -32,6 +32,7 @@ class MailLoad(object);
         except Exception as e:
             print(e)
         
+        print(self.email_message)
         self.subject = None
         self.to_address = None
         self.cc_address = None
@@ -43,5 +44,22 @@ class MailLoad(object);
         # {name: file_name, data: data}
         self.attach_file_list = []
 
-        for part in self.email_message.walk():
+        self.subject = self._get_decoded_header("Subject")
+        self.receive_date = self._get_decoded_header("Date")
+        self.to_address = self._get_decoded_header("To")
+        self.cc_address = self._get_decoded_header("Cc")
+        self.from_address = self._get_decoded_header("From")
 
+
+
+    def _get_decoded_header(self, key_name):
+        """
+        ヘッダーオブジェクトからデコード済の結果を取得する
+        """
+        # 該当項目がないkeyは空文字を戻す
+        raw_obj = self.email_message.get(key_name)
+        print(key_name)
+        print(raw_obj)
+
+        if raw_obj is None:
+            return ""
