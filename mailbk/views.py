@@ -8,7 +8,7 @@ from datetime import datetime
 import os
 import glob
 from mailbk.eml import MailParser
-from mailbk.img_from_mail import MailLoad
+from mailbk.mail import MailLoad
 import mimetypes
 import shutil
 from  mailbk import encoding
@@ -51,8 +51,8 @@ def index(request,url=None):
                 subject = ''
                 recieve_date = ''
                 try:
-                    mailpas = MailParser(email)
-                    mailpas.get_attr_data()
+                    mailpas = MailLoad(email)
+                    # mailpas.get_attr_data()
                     # return HttpResponse(result)
                     subject = mailpas.subject
                     dte = mailpas.receive_date
@@ -101,6 +101,7 @@ def mail(request,url):
             'to' : mailpas.to_address,
             'cc' : mailpas.cc_address,
             'disc' : mailpas.body.splitlines(),
+            # 'disc' : mailpas.text.splitlines(),
             # 'attach' : attachFileList,
             'attach' : mailpas.attach_file_list,
             'back' : url,
