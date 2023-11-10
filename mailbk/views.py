@@ -17,6 +17,8 @@ from operator import itemgetter
 # from pysmb
 _SLASH = '\\'   # windows
 # _SLASH = '/'  # linux
+_SHARP = '#'
+_SHARPL = '^＃'
 
 # Create your views here.
 def index(request,url=None):
@@ -71,7 +73,7 @@ def index(request,url=None):
                     'recieve_date' : recieve_date,
                     # 'filename' : 'mail/' + email.replace('/','%5c'),
                     # 'subject' : subject + str(recieve_date),
-                    'filename' : 'mail/' + email.replace(_SLASH,'%5c'),
+                    'filename' : 'mail/' + email.replace(_SLASH,'%5c').replace(_SHARP,_SHARPL),
                     'subject' : subject,
                 })
             mailList.sort(key=itemgetter('recieve_date'), reverse=False)
@@ -86,14 +88,14 @@ def mail(request,url):
     if request.method == 'GET':
         # メールファイルを開く
         # mailpas = MailParser(os.path.join(*url.split('\\')))
-        mailpas = MailLoad(os.path.join(*url.split('\\')))
+        mailpas = MailLoad(os.path.join(*url.replace(_SHARPL,_SHARP).split('\\')))
         # try:
         #     mailpas.get_attr_data()
         # except Exception as e:
         #     mailpas.subject = e
 
-        # dirpath = os.path.dirname(os.path.join(*url.split('\\')))
-        # attachFileList = _getAttachFileList(mailpas.attach_file_list, dirpath)
+        dirpath = os.path.dirname(os.path.join(*url.split('\\')))
+        attachFileList = _getAttachFileList(mailpas.attach_file_list, dirpath)
     
         context = {
             'subject' : mailpas.subject,
@@ -102,8 +104,8 @@ def mail(request,url):
             'cc' : mailpas.cc_address,
             'disc' : mailpas.body.splitlines(),
             # 'disc' : mailpas.text.splitlines(),
-            # 'attach' : attachFileList,
-            'attach' : mailpas.attach_file_list,
+            'attach' : attachFileList,
+            # 'attach' : mailpas.attach_file_list,
             'back' : url,
         }
 
