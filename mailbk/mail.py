@@ -22,6 +22,16 @@ class MailLoad(object):
     attach_file_list = []
 
     def __init__(self, mail_file_path):
+        # 変数初期化
+        self.email_msg = None
+        self.subject = None
+        self.receive_date = None
+        self.to_address = None
+        self.cc_address = None
+        self.from_address = None
+        self.body = None
+        self.attach_file_list = []
+
         self.perse_eml(mail_file_path)
         self.get_email_data(self.email_msg)
         None

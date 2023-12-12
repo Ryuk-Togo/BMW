@@ -19,6 +19,7 @@ _SLASH = '\\'   # windows
 # _SLASH = '/'  # linux
 _SHARP = '#'
 _SHARPL = '^＃'
+_TMP_PATH = 'mail/tmp/'
 
 # Create your views here.
 def index(request,url=None):
@@ -86,16 +87,28 @@ def index(request,url=None):
 
 def mail(request,url):
     if request.method == 'GET':
+        # メールファイルをtmpフォルダへ移動
+        dt = datetime.now()
+        foler_name = dt.strftime('%Y%m%d_%H%M%S%f')
+        file_name = url.replace(_SHARPL,_SHARP).split('\\')[-1]
+        tmp_mail_path = _TMP_PATH + foler_name
+        os.mkdir(tmp_mail_path)
+        shutil.copy2(os.path.join(*url.replace(_SHARPL,_SHARP).split('\\')), tmp_mail_path)
+
         # メールファイルを開く
         # mailpas = MailParser(os.path.join(*url.split('\\')))
-        mailpas = MailLoad(os.path.join(*url.replace(_SHARPL,_SHARP).split('\\')))
+        # mailpas = MailLoad(os.path.join(*url.replace(_SHARPL,_SHARP).split('\\')))
+        mailpas = MailLoad(tmp_mail_path + '/' + file_name)
         # try:
         #     mailpas.get_attr_data()
         # except Exception as e:
         #     mailpas.subject = e
 
-        dirpath = os.path.dirname(os.path.join(*url.split('\\')))
+        # dirpath = os.path.dirname(os.path.join(*url.split('\\')))
+        # dirpath = os.path.dirname(os.path.join(*tmp_mail_path.split('/')))
+        dirpath = os.path.join(*tmp_mail_path.split('/'))
         attachFileList = _getAttachFileList(mailpas.attach_file_list, dirpath)
+        # attachFileList = _getAttachFileList(mailpas.attach_file_list, tmp_mail_path.replace('//','\\'))
     
         context = {
             'subject' : mailpas.subject,
