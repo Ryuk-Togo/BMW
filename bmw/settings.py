@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bmwsys.apps.BmwsysConfig',
     'mailbk.apps.MailbkConfig',
+    'estimates.apps.EstimatesConfig',
 ]
 
 MIDDLEWARE = [

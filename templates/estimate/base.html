@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE himl>
+<html>
+    <head lang='ja'>
+    <!-- <meta charset='UTF-8'> -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>
+        案件管理
+    </title>
+    <link rel="stylesheet" href="{% static 'common/css/bootstrap.min.css' %}" >
+    <link rel="stylesheet" href="{% static 'common/css/jquery-ui.css' %}" >
+    <link rel="stylesheet" href="{% static 'estimate/css/main.css' %}" >
+    <script src="{% static 'common/js/bootstrap.js' %}" ></script>
+    <script src="{% static 'common/js/jquery-3.3.1.js' %}" ></script>
+    <script src="{% static 'common/js/jquery-ui.js' %}" ></script>
+    <script src="{% static 'estimate/js/main.js' %}" ></script>
+    {% block header %}
+    {% endblock %}
+</head>
+<body>
+    <header>
+        案件管理
+    </header>
+    <div id="content" class="content">
+        <div id="menu" class="box menu">
+            メニュー<br/><br/>
+            <a href="/estimate/input/">新規登録</a><br/>
+            <a href="">削除</a><br/>
+        </div>
+        <div id="estimate" class="box estimate">
+            {% block body %}
+            {% endblock %}
+        </div>
+    </div>
+    
+</body>
+</html>

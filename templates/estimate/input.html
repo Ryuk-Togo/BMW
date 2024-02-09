@@ -1,0 +1,17 @@
+{% extends "estimate/base.html" %}
+{% load static %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'estimate/css/input.css' %}" >
+
+{% endblock %}
+
+{% block body %}
+
+    <form method="post">
+        {{message}}
+        {% csrf_token %}
+        {{ form.management_form }}
+        {{ form.as_p }}    
+    </form>
+{% endblock %}

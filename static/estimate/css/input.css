@@ -1,0 +1,19 @@
+ /* ラベルと入力項目は改行を入れる */
+label + input {
+    display: block;
+    margin-top: -10px;
+}
+
+label + textarea {
+    display: block;
+    margin-top: -10px;
+}
+
+label + select {
+    display: block;
+    margin-top: -10px;
+}
+
+#id_description {
+    width: 600px;
+}
