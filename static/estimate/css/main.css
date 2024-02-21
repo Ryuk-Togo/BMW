@@ -27,4 +27,12 @@ header {
     left: 200px;
     margin-left: 20px;
     padding-top: 20px;
+    overflow-y: auto;
+    height: 100%;
+    width: 100%;
+}
+th {
+    padding: 10px;
+    background-color: rgb(212, 255, 231);
+    text-align: center;
 }

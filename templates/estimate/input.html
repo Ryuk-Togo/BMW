@@ -8,10 +8,12 @@
 
 {% block body %}
 
-    <form method="post">
+    <!-- <form method="post" form="estimate" action="{% url 'estimate:input' %}" id="estimate"> -->
+    <form method="post" form="estimate">
         {{message}}
         {% csrf_token %}
         {{ form.management_form }}
-        {{ form.as_p }}    
+        {{ form.as_p }}
+        <button type="submit" style="width:100px; height:50px">登録</button>
     </form>
 {% endblock %}

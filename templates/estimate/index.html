@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block header %}
+<link rel="stylesheet" href="{% static 'estimate/css/index.css' %}" >
 
 {% endblock %}
 
@@ -9,5 +10,69 @@
 
     <div id="estimate_list">
         案件リスト
+    </div>
+    <hr>
+    <div>
+        <form action="">
+            {% csrf_token %}
+            {{ form.management_form }}
+            <table>
+                <tr>
+                    <th colspan="3">案件</th>
+                    <th colspan="3">想定・概算</th>
+                    <th colspan="6">見積提示</th>
+                    <th colspan="2">納品</th>
+                    <th colspan="2">検収</th>
+                    <th rowspan="2">備考</th>
+                </tr>
+                <tr>
+                    <th>変更<br/>削除</th>
+                    <th>中止</th>
+                    <th>案件名</th>
+                    <th>工数</th>
+                    <th>納期</th>
+                    <th>見積提示時期</th>
+                    <th>見積書</th>
+                    <th>工数</th>
+                    <th>納期</th>
+                    <th>受注日</th>
+                    <th>検収予定日</th>
+                    <th>本稼働日</th>
+                    <th>納品書</th>
+                    <th>納品日</th>
+                    <th>検収書</th>
+                    <th>検収日</th>
+                </tr>
+                {% for estimate in estimates %}
+                    <tr>
+                        <td>
+                            <a href="/estimate/modify/{{ estimate.id }}">変更</a><br/>
+                            <a href="/estimate/delete/{{ estimate.id }}">削除</a>
+                        </td>
+                        <td>
+                            {% if estimate.is_stoped %}
+                            中止
+                            {{ estimate.is_stoped }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {{ estimate.rouph_estimate_name }}
+                        </td>
+                        <td>
+                            {{ estimate.rouph_estimate_man_hour }}{{ estimate.rouph_estimate_unit }}
+                        </td>
+                        <td>
+                            {{ estimate.rouph_estimate_delivary_date }}
+                        </td>
+                        <td>
+                            {{ estimate.quotation_deadline }}
+                        </td>
+                        <td>
+                            {{ estimate.estimate_files }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </form>
     </div>
 {% endblock %}
