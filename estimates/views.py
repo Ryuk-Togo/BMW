@@ -24,12 +24,13 @@ def input(request,url=None):
         }
         return render(request, 'estimate/input.html', context)
     else:
-        form = SingleEstimateMOdelForm(request.POST)
+        form = SingleEstimateMOdelForm(request.POST, request.FILES)
 
         if form.is_valid():
             estimate = Estimate()
 
             estimate.rouph_estimate_name = form.cleaned_data['rouph_estimate_name']
+            estimate.rouph_estimate_files = request.FILES['rouph_estimate_files']
             estimate.save()
             return redirect('/estimate/')
         
@@ -45,12 +46,14 @@ def modify(request,id,url=None):
         return render(request, 'estimate/input.html', context)
     
     else:
-        form = SingleEstimateMOdelForm(request.POST)
+        form = SingleEstimateMOdelForm(request.POST, request.FILES)
 
         if form.is_valid():
             estimate = Estimate.objects.get(pk=id)
 
             estimate.rouph_estimate_name = form.cleaned_data['rouph_estimate_name']
+            # estimate.rouph_estimate_files = request.FILES['rouph_estimate_files']
+            rouph_estimate_files = request.FILES['rouph_estimate_files']
             estimate.save()
             return redirect('/estimate/')
 
@@ -59,3 +62,8 @@ def delete(request,id,url=None):
         estimate = Estimate.objects.get(pk=id)
         estimate.delete()
         return redirect('/estimate/')
+
+def _upload_file(f):
+    with open('test/概算見積書/test.txt','wb+') as estimate_file:
+        for chunk in f.chunks():
+            estimate_file.write(chunk)

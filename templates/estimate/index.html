@@ -12,7 +12,8 @@
         案件リスト
     </div>
     <hr>
-    <div>
+    <div class="holizen-scroll">
+        <div class="scrollable-content">
         <form action="">
             {% csrf_token %}
             {{ form.management_form }}
@@ -59,20 +60,34 @@
                             {{ estimate.rouph_estimate_name }}
                         </td>
                         <td>
-                            {{ estimate.rouph_estimate_man_hour }}{{ estimate.rouph_estimate_unit }}
+                            {% if estimate.rouph_estimate_man_hour %}
+                                {{ estimate.rouph_estimate_man_hour }}
+                            {% else %}
+                                未定
+                            {% endif %}
+                            {% if estimate.rouph_estimate_unit %}
+                                {{ estimate.rouph_estimate_unit }}
+                            {% endif %}
                         </td>
                         <td>
-                            {{ estimate.rouph_estimate_delivary_date }}
-                        </td>
+                            {% if estimate.rouph_estimate_delivary_date %}
+                                {{ estimate.rouph_estimate_delivary_date }}
+                            {% endif %}
+                            </td>
                         <td>
-                            {{ estimate.quotation_deadline }}
-                        </td>
+                            {% if estimate.quotation_deadline %}
+                                {{ estimate.quotation_deadline }}
+                            {% endif %}
+                            </td>
                         <td>
-                            {{ estimate.estimate_files }}
+                            {% if estimate.estimate_files %}
+                                {{ estimate.estimate_files }}
+                            {% endif %}
                         </td>
                     </tr>
                 {% endfor %}
             </table>
         </form>
+        </div>
     </div>
 {% endblock %}

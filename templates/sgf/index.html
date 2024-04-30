@@ -1,0 +1,40 @@
+{% extends "sgf/base.html" %}
+{% load static %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'sgf/css/index.css' %}" >
+
+{% endblock %}
+
+{% block body %}
+
+    <div id="sgf_list">
+        ブランチ一覧
+    </div>
+    <hr>
+    <div class="holizen-scroll">
+        <div class="scrollable-content">
+        <form action="">
+            {% csrf_token %}
+            {{ form.management_form }}
+            <table>
+                <tr>
+                    <th>ブランチ</th>
+                    <th>コマンド</th>
+                    <th>説明</th>
+                </tr>
+
+                {% for branch in branches %}
+                    <tr>
+                        <td>
+                            <a href="/sgf/modify/{{ estimate.id }}">変更</a><br/>
+                            <a href="/sgf/delete/{{ estimate.id }}">削除</a>
+                        </td>
+
+                    </tr>
+                {% endfor %}
+            </table>
+        </form>
+        </div>
+    </div>
+{% endblock %}

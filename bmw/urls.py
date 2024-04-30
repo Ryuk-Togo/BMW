@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('mailbk/', include('mailbk.urls')),
     path('estimate/', include('estimates.urls')),
+    path('sgf/', include('sgf.urls')),
 ]

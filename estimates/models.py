@@ -10,7 +10,7 @@ def estimate_upload_to(instance, filename):
 
 # 発注書ファイルの配置位置
 def placing_upload_to(instance, filename):
-    return os.path.join('uploads', instance.rouph_estimate_name + '/見積書', filename)
+    return os.path.join('uploads', instance.rouph_estimate_name + '/発注書', filename)
 
 class Estimate(models.Model):
 

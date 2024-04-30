@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'bmwsys.apps.BmwsysConfig',
     'mailbk.apps.MailbkConfig',
     'estimates.apps.EstimatesConfig',
+    'sgf.apps.SgfConfig',
 ]
 
 MIDDLEWARE = [

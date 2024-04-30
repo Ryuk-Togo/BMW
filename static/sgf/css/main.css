@@ -1,13 +1,13 @@
 header {
     height: 50px;
     padding: 15px;
-    background-color: rgb(25, 66, 33);
+    background-color: rgb(70, 0, 100);
     color: white;
 }
 
 .content {
     position: relative;
-    width: 100%;
+    width: 90%;
     height: 100%;
 }
 .box {
@@ -22,14 +22,14 @@ header {
     background-color: black;
     color: rgb(255, 255, 255);
 }
-.estimate {
+.sgf {
     top: 0px;
     left: 200px;
     margin-left: 20px;
     padding-top: 20px;
     overflow-y: auto;
     height: 100%;
-    width: 100%;
+    width: calc(100% - 200px);
 }
 th {
     padding: 10px;
@@ -37,10 +37,9 @@ th {
     text-align: center;
 }
 .holizen-scroll {
-    width: calc(100% - 200px);
-    overflow-x: auto; /* 横スクロール可能にする */
-    white-space: nowrap; /* 要素が折り返されないようにする */
+    /* width: calc(100% - 200px); */
+    overflow-x: unset; /* 横スクロール可能にする */
 }
 .scrollable-content {
-    width: 3000px;
+    width: 100%;
   }
